@@ -1,0 +1,29 @@
+[
+  {
+    "id": "app1773042811253",
+    "name": "Quiz Generator",
+    "path": "C:\\Master Folder\\Programas\\Quiz 1.0\\Iniciar Quiz Generator.bat",
+    "icon": "🔧",
+    "category": "geral",
+    "stage": "script",
+    "description": "Gerador de Quizzes"
+  },
+  {
+    "id": "app1773042933945",
+    "name": "Meta Images Generator",
+    "path": "C:\\Master Folder\\Programas\\MetaImages\\Iniciar.bat",
+    "icon": "🔧",
+    "category": "geral",
+    "stage": "images",
+    "description": ""
+  },
+  {
+    "id": "app1773045672172",
+    "name": "BuscaGoogleCC",
+    "path": "C:\\Master Folder\\Programas\\BuscaGoogleCC\\index.html",
+    "icon": "🔧",
+    "category": "geral",
+    "stage": "images",
+    "description": "Busca no Google de Creative Commons"
+  }
+]

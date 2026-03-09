@@ -1,0 +1,28 @@
+[
+  {
+    "id": "proj1773043405696",
+    "title": "0001 Classic Muscle Car Trivia (60s–70s) Part 1",
+    "channelId": "ch1",
+    "stage": "editing",
+    "notes": "",
+    "createdAt": "2026-03-09T08:03:25.696Z",
+    "updatedAt": "2026-03-09T09:19:57.061Z",
+    "dueDate": "",
+    "tags": [],
+    "priority": "high",
+    "path": "C:\\Master Folder\\Work\\YouTube\\Cars Trivia\\0001 Classic Muscle Car Trivia (60s–70s) Part 1",
+    "labels": [
+      "lbl1773047546225"
+    ],
+    "checklist": [
+      {
+        "text": "Organizar arquivos",
+        "done": true
+      },
+      {
+        "text": "Revisar audio",
+        "done": false
+      }
+    ]
+  }
+]

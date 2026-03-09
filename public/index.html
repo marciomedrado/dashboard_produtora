@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Produtora</title>
+  <meta name="description" content="Dashboard de produção de vídeos - Organize seus canais, ferramentas e projetos">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-icon">🎬</span>
+        <span class="logo-text">Produtora</span>
+      </div>
+      <button class="sidebar-toggle" id="sidebarToggle" title="Minimizar menu">☰</button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button class="nav-item active" data-view="dashboard" id="nav-dashboard">
+        <span class="nav-icon">📊</span>
+        <span class="nav-label">Dashboard</span>
+      </button>
+      <button class="nav-item" data-view="pipeline" id="nav-pipeline">
+        <span class="nav-icon">📋</span>
+        <span class="nav-label">Pipeline</span>
+      </button>
+      <button class="nav-item" data-view="apps" id="nav-apps">
+        <span class="nav-icon">🚀</span>
+        <span class="nav-label">Ferramentas</span>
+      </button>
+      <button class="nav-item" data-view="channels" id="nav-channels">
+        <span class="nav-icon">📺</span>
+        <span class="nav-label">Canais</span>
+      </button>
+      <button class="nav-item" data-view="folders" id="nav-folders">
+        <span class="nav-icon">📁</span>
+        <span class="nav-label">Pastas</span>
+      </button>
+      <button class="nav-item" data-view="settings" id="nav-settings">
+        <span class="nav-icon">⚙️</span>
+        <span class="nav-label">Config</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-clock" id="sidebarClock"></div>
+    </div>
+  </aside>
+
+  <!-- ═══ MAIN CONTENT ═══ -->
+  <main class="main-content" id="mainContent">
+
+    <!-- ─── DASHBOARD VIEW ─── -->
+    <section class="view active" id="view-dashboard">
+      <div class="view-header">
+        <h1>Dashboard</h1>
+        <p class="view-subtitle" id="dashboardGreeting"></p>
+      </div>
+
+      <div class="stats-grid" id="statsGrid">
+        <!-- Populated by JS -->
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h3>🚀 Acesso Rápido</h3>
+            <button class="btn-ghost" onclick="showView('apps')">Ver todos</button>
+          </div>
+          <div class="quick-apps" id="quickApps">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <h3>📋 Próximos Vídeos</h3>
+            <button class="btn-ghost" onclick="showView('pipeline')">Pipeline</button>
+          </div>
+          <div class="upcoming-list" id="upcomingList">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <div class="dash-card full-width">
+          <div class="dash-card-header">
+            <h3>📊 Visão Geral dos Canais</h3>
+          </div>
+          <div class="channels-overview" id="channelsOverview">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PIPELINE VIEW ─── -->
+    <section class="view" id="view-pipeline">
+      <div class="view-header">
+        <h1>Pipeline de Produção</h1>
+        <div class="view-actions">
+          <select class="select-styled" id="pipelineChannelFilter">
+            <option value="">Todos os Canais</option>
+          </select>
+          <button class="btn-primary" onclick="openProjectModal()">
+            <span>+</span> Novo Vídeo
+          </button>
+        </div>
+      </div>
+      <div class="pipeline-board" id="pipelineBoard">
+        <!-- Populated by JS — Kanban columns -->
+      </div>
+    </section>
+
+    <!-- ─── APPS / TOOLS VIEW ─── -->
+    <section class="view" id="view-apps">
+      <div class="view-header">
+        <h1>Ferramentas & Aplicativos</h1>
+        <div class="view-actions">
+          <button class="btn-primary" onclick="openAppModal()">
+            <span>+</span> Adicionar Ferramenta
+          </button>
+        </div>
+      </div>
+      <div class="apps-filter-bar" id="appsFilterBar">
+        <button class="filter-chip active" data-filter="">Todos</button>
+      </div>
+      <div class="apps-grid" id="appsGrid">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- ─── CHANNELS VIEW ─── -->
+    <section class="view" id="view-channels">
+      <div class="view-header">
+        <h1>Canais</h1>
+        <div class="view-actions">
+          <button class="btn-primary" onclick="openChannelModal()">
+            <span>+</span> Novo Canal
+          </button>
+        </div>
+      </div>
+      <div class="channels-grid" id="channelsGrid">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+    <!-- ─── FOLDERS VIEW ─── -->
+    <section class="view" id="view-folders">
+      <div class="view-header">
+        <h1>Explorador de Pastas</h1>
+        <div class="view-actions">
+          <button class="btn-primary" onclick="openFolderInExplorer()">
+            📂 Abrir no Explorer
+          </button>
+        </div>
+      </div>
+      <div class="folder-browser">
+        <div class="folder-breadcrumb" id="folderBreadcrumb"></div>
+        <div class="folder-drives" id="folderDrives"></div>
+        <div class="folder-contents" id="folderContents"></div>
+      </div>
+    </section>
+
+    <!-- ─── SETTINGS VIEW ─── -->
+    <section class="view" id="view-settings">
+      <div class="view-header">
+        <h1>Configurações</h1>
+      </div>
+      <div class="settings-container">
+        <div class="settings-section">
+          <h3>Etapas de Produção</h3>
+          <p class="settings-desc">Defina as etapas do pipeline de produção dos seus vídeos.</p>
+          <div id="stagesEditor"></div>
+          <button class="btn-secondary" onclick="addStage()">+ Adicionar Etapa</button>
+        </div>
+        <div class="settings-section">
+          <h3>🏷️ Etiquetas (Labels)</h3>
+          <p class="settings-desc">Crie etiquetas coloridas para categorizar seus vídeos no pipeline.</p>
+          <div id="labelsEditor"></div>
+          <button class="btn-secondary" onclick="addLabel()">+ Adicionar Etiqueta</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══ MODALS ═══ -->
+
+  <!-- App Modal -->
+  <div class="modal-overlay" id="appModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="appModalTitle">Adicionar Ferramenta</h2>
+        <button class="modal-close" onclick="closeModal('appModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="appEditId">
+        <div class="form-group">
+          <label>Nome</label>
+          <input type="text" id="appName" placeholder="Ex: DaVinci Resolve" class="input-styled">
+        </div>
+        <div class="form-group">
+          <label>Caminho do Executável ou Pasta</label>
+          <div class="input-with-btn">
+            <input type="text" id="appPath" placeholder="C:\Program Files\..." class="input-styled">
+            <button class="btn-icon" onclick="openBrowseForApp()" title="Procurar">📂</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Ícone (emoji)</label>
+          <input type="text" id="appIcon" placeholder="🎞️" class="input-styled input-small">
+        </div>
+        <div class="form-group">
+          <label>Etapa de Produção</label>
+          <select id="appStage" class="select-styled"></select>
+        </div>
+        <div class="form-group">
+          <label>Descrição (opcional)</label>
+          <input type="text" id="appDescription" placeholder="Para que serve esta ferramenta?" class="input-styled">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeModal('appModal')">Cancelar</button>
+        <button class="btn-primary" onclick="saveApp()">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Channel Modal -->
+  <div class="modal-overlay" id="channelModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="channelModalTitle">Novo Canal</h2>
+        <button class="modal-close" onclick="closeModal('channelModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="channelEditId">
+        <div class="form-group">
+          <label>Nome do Canal</label>
+          <input type="text" id="channelName" placeholder="Ex: Canal Principal" class="input-styled">
+        </div>
+        <div class="form-group">
+          <label>Cor</label>
+          <input type="color" id="channelColor" value="#6C5CE7" class="input-color">
+        </div>
+        <div class="form-group">
+          <label>Ícone (emoji)</label>
+          <input type="text" id="channelIcon" placeholder="🎬" class="input-styled input-small">
+        </div>
+        <div class="form-group">
+          <label>Pastas Vinculadas</label>
+          <div id="channelFoldersList" class="channel-folders-list"></div>
+          <button class="btn-secondary" onclick="addChannelFolder()">+ Adicionar Pasta</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeModal('channelModal')">Cancelar</button>
+        <button class="btn-primary" onclick="saveChannel()">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Project Modal -->
+  <div class="modal-overlay" id="projectModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="projectModalTitle">Novo Vídeo</h2>
+        <button class="modal-close" onclick="closeModal('projectModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="projectEditId">
+        <div class="form-group">
+          <label>Título do Vídeo</label>
+          <input type="text" id="projectTitle" placeholder="Ex: Tutorial de edição" class="input-styled">
+        </div>
+        <div class="form-group">
+          <label>Canal</label>
+          <select id="projectChannel" class="select-styled"></select>
+        </div>
+        <div class="form-group">
+          <label>Etapa</label>
+          <select id="projectStage" class="select-styled"></select>
+        </div>
+        <div class="form-group">
+          <label>Caminho do Vídeo (Pasta)</label>
+          <div class="input-with-btn">
+            <input type="text" id="projectPath" placeholder="C:\Caminhos\MeuVideo" class="input-styled">
+            <button class="btn-icon" onclick="openBrowseForProject()" title="Procurar Pasta">📂</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Prioridade</label>
+          <select id="projectPriority" class="select-styled">
+            <option value="low">Baixa</option>
+            <option value="normal" selected>Normal</option>
+            <option value="high">Alta</option>
+            <option value="urgent">Urgente</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Data Limite</label>
+          <input type="date" id="projectDueDate" class="input-styled">
+        </div>
+        <div class="form-group">
+          <label>🏷️ Etiquetas</label>
+          <div class="labels-selector" id="projectLabels"></div>
+        </div>
+        <div class="form-group">
+          <label>✅ Checklist</label>
+          <div class="checklist-editor" id="projectChecklist"></div>
+          <button class="btn-secondary btn-sm" onclick="addChecklistItem()" style="margin-top:6px">+ Adicionar
+            Item</button>
+        </div>
+        <div class="form-group">
+          <label>Notas</label>
+          <textarea id="projectNotes" placeholder="Observações sobre o vídeo..." class="input-styled textarea-styled"
+            rows="3"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeModal('projectModal')">Cancelar</button>
+        <button class="btn-primary" onclick="saveProject()">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Browse Modal -->
+  <div class="modal-overlay" id="browseModal">
+    <div class="modal modal-wide">
+      <div class="modal-header">
+        <h2>Selecionar Caminho</h2>
+        <button class="modal-close" onclick="closeModal('browseModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="browse-path-bar">
+          <input type="text" id="browseCurrentPath" class="input-styled" placeholder="C:\">
+          <button class="btn-secondary"
+            onclick="browseTo(document.getElementById('browseCurrentPath').value)">Ir</button>
+        </div>
+        <div class="browse-drives" id="browseDrives"></div>
+        <div class="browse-list" id="browseList"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeModal('browseModal')">Cancelar</button>
+        <button class="btn-primary" onclick="confirmBrowse()">Selecionar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card Detail Modal -->
+  <div class="modal-overlay" id="cardDetailModal">
+    <div class="modal modal-wide">
+      <div class="modal-header">
+        <h2 id="cardDetailTitle">Detalhes do Vídeo</h2>
+        <button class="modal-close" onclick="closeModal('cardDetailModal')">&times;</button>
+      </div>
+      <div class="modal-body" id="cardDetailBody">
+        <!-- Populated by JS -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeModal('cardDetailModal')">Fechar</button>
+        <button class="btn-primary" id="cardDetailEditBtn">✏️ Editar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

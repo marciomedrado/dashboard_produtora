@@ -1,0 +1,76 @@
+{
+  "productionStages": [
+    {
+      "id": "idea",
+      "name": "Ideia",
+      "icon": "💡",
+      "color": "#ff4d4d"
+    },
+    {
+      "id": "script",
+      "name": "Roteiro",
+      "icon": "📝",
+      "color": "#ffcc00"
+    },
+    {
+      "id": "images",
+      "name": "Produção de Imagens",
+      "icon": "🎨",
+      "color": "#FF9F43"
+    },
+    {
+      "id": "recording",
+      "name": "Gravação",
+      "icon": "🎙️",
+      "color": "#FF7675"
+    },
+    {
+      "id": "editing",
+      "name": "Edição",
+      "icon": "🎞️",
+      "color": "#A29BFE"
+    },
+    {
+      "id": "thumbnail",
+      "name": "Thumbnail",
+      "icon": "🖼️",
+      "color": "#55EFC4"
+    },
+    {
+      "id": "review",
+      "name": "Revisão",
+      "icon": "🔍",
+      "color": "#FD79A8"
+    },
+    {
+      "id": "schedule",
+      "name": "Agendar",
+      "icon": "📅",
+      "color": "#00CEC9"
+    },
+    {
+      "id": "published",
+      "name": "Publicado",
+      "icon": "✅",
+      "color": "#00B894"
+    },
+    {
+      "id": "stage1773046559491",
+      "name": "Rascunho",
+      "icon": "📌",
+      "color": "#9B59B6"
+    }
+  ],
+  "labels": [
+    {
+      "id": "lbl1773047540509",
+      "name": "Urgente",
+      "color": "#6C5CE7"
+    },
+    {
+      "id": "lbl1773047546225",
+      "name": "Revisar",
+      "color": "#6C5CE7"
+    }
+  ]
+}
