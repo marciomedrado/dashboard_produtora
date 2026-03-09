@@ -599,7 +599,11 @@ function renderSettings() {
       <input type="text" class="stage-icon-input" value="${s.icon}" onchange="updateStage(${i}, 'icon', this.value)" title="Ícone">
       <input type="text" class="stage-name-input" value="${escapeAttr(s.name)}" onchange="updateStage(${i}, 'name', this.value)" placeholder="Nome da etapa">
       <input type="color" class="stage-color-input" value="${s.color}" onchange="updateStage(${i}, 'color', this.value)" title="Cor">
-      <button class="stage-remove" onclick="removeStage(${i})" title="Remover">✕</button>
+      <div class="stage-editor-actions">
+        <button class="stage-action" onclick="moveStage(${i}, -1)" title="Mover para Esquerda/Cima" ${i === 0 ? 'disabled style="opacity: 0.2; cursor: default;"' : ''}>⬅️</button>
+        <button class="stage-action" onclick="moveStage(${i}, 1)" title="Mover para Direita/Baixo" ${i === stages.length - 1 ? 'disabled style="opacity: 0.2; cursor: default;"' : ''}>➡️</button>
+        <button class="stage-remove" onclick="removeStage(${i})" title="Remover">✕</button>
+      </div>
     </div>
   `).join('');
 
@@ -671,6 +675,23 @@ async function addStage() {
   await api('/api/settings', { method: 'PUT', body: state.settings });
   renderSettings();
   toast('Etapa adicionada', 'success');
+}
+
+async function moveStage(index, direction) {
+  const stages = state.settings.productionStages;
+  const newIndex = index + direction;
+  if (newIndex < 0 || newIndex >= stages.length) return;
+
+  // Swap
+  const temp = stages[index];
+  stages[index] = stages[newIndex];
+  stages[newIndex] = temp;
+
+  await api('/api/settings', { method: 'PUT', body: state.settings });
+  // Need to update Pipeline view UI if it was open, or just let user re-navigate
+  if (state.currentView === 'settings') renderSettings();
+  if (state.currentView === 'pipeline') renderPipelineColumns();
+  toast('Ordem atualizada', 'success');
 }
 
 // ═══════════════════════════════════════════════════════════════════
