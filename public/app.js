@@ -22,6 +22,7 @@ let state = {
   browseCallback: null,
   browsePath: 'C:\\',
   browseSelected: '',
+  browseHistory: [],
 };
 
 // ─── Init ───────────────────────────────────────────────────────
@@ -294,7 +295,7 @@ function renderPipelineColumns() {
           <span class="pipeline-col-count">${stageProjects.length}</span>
         </div>
         <div class="pipeline-col-body" data-stage="${stage.id}" 
-             ondragover="event.preventDefault(); this.classList.add('drag-over')" 
+             ondragover="dragOverStage(event, this)" 
              ondragleave="this.classList.remove('drag-over')"
              ondrop="dropProject(event, '${stage.id}')">
           ${stageProjects.length === 0 ? '<div style="text-align:center;padding:20px;color:var(--text-muted);font-size:0.8rem;">Arraste vídeos aqui</div>' : ''}
@@ -348,7 +349,7 @@ function renderPipelineColumns() {
       }
 
       return `
-              <div class="pipeline-card" draggable="true" 
+              <div class="pipeline-card" draggable="true" data-id="${p.id}"
                    onclick="openCardDetail('${p.id}')"
                    ondragstart="dragProject(event, '${p.id}')"
                    ondragend="event.target.classList.remove('dragging')">
@@ -362,6 +363,7 @@ function renderPipelineColumns() {
                 <div class="pipeline-card-meta">
                   <span>
                     <span class="upcoming-priority priority-${p.priority}">${priorityLabel(p.priority)}</span>
+                    <button class="btn-ghost btn-sm" onclick="event.stopPropagation(); duplicateProject('${p.id}')" title="Duplicar">📋</button>
                     ${p.path ? (() => { const pid = registerPath(p.path); return `<button class="btn-ghost btn-sm" onclick="event.stopPropagation(); launchById('${pid}')" title="Abrir Pasta">📂</button>`; })() : ''}
                   </span>
                   ${dueText}
@@ -382,18 +384,62 @@ function dragProject(event, projectId) {
   event.target.classList.add('dragging');
 }
 
+function dragOverStage(event, colBody) {
+  event.preventDefault();
+  colBody.classList.add('drag-over');
+
+  const afterElement = getDragAfterElement(colBody, event.clientY);
+  const draggable = document.querySelector('.dragging');
+  if (draggable) {
+    if (afterElement == null) {
+      colBody.appendChild(draggable);
+    } else {
+      colBody.insertBefore(draggable, afterElement);
+    }
+  }
+}
+
+function getDragAfterElement(container, y) {
+  const draggableElements = [...container.querySelectorAll('.pipeline-card:not(.dragging)')];
+
+  return draggableElements.reduce((closest, child) => {
+    const box = child.getBoundingClientRect();
+    const offset = y - box.top - box.height / 2;
+    if (offset < 0 && offset > closest.offset) {
+      return { offset: offset, element: child };
+    } else {
+      return closest;
+    }
+  }, { offset: Number.NEGATIVE_INFINITY }).element;
+}
+
 async function dropProject(event, newStage) {
   event.preventDefault();
   event.currentTarget.classList.remove('drag-over');
   const projectId = event.dataTransfer.getData('text/plain');
 
   const project = state.projects.find(p => p.id === projectId);
-  if (!project || project.stage === newStage) return;
+  if (!project) return;
 
+  const oldStage = project.stage;
   project.stage = newStage;
-  await api(`/api/projects/${projectId}`, { method: 'PUT', body: { stage: newStage } });
+
+  const colBody = event.currentTarget.closest('.pipeline-col-body') || event.currentTarget;
+  const cardElements = Array.from(colBody.querySelectorAll('.pipeline-card'));
+  const newOrderIds = cardElements.map(el => el.dataset.id).filter(id => id);
+
+  await api(`/api/projects/reorder`, {
+    method: 'PUT',
+    body: { stage: newStage, projectIds: newOrderIds }
+  });
+
+  await loadAll();
   renderPipelineColumns();
-  toast(`Movido para "${getStageName(newStage)}"`, 'success');
+  if (state.currentView === 'dashboard') renderDashboard();
+
+  if (oldStage !== newStage) {
+    toast(`Movido para "${getStageName(newStage)}"`, 'success');
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -768,11 +814,23 @@ async function deleteApp(id) {
 // ─── Browse for App Path ────────────────────────────────────────
 function openBrowseForApp() {
   state.browseMode = 'app';
+  const currentVal = document.getElementById('appPath').value.trim();
   state.browseCallback = (selectedPath) => {
     document.getElementById('appPath').value = selectedPath;
   };
   state.browseSelected = '';
-  state.browsePath = 'C:\\';
+
+  // Attempt to use the directory of the current file path, or the current path if directory, fallback to C:\
+  let initialPath = 'C:\\';
+  if (currentVal) {
+    if (currentVal.endsWith('\\')) initialPath = currentVal;
+    else {
+      const lastSlash = currentVal.lastIndexOf('\\');
+      if (lastSlash !== -1) initialPath = currentVal.substring(0, lastSlash + 1);
+    }
+  }
+  state.browsePath = initialPath;
+
   openBrowseModal();
 }
 
@@ -827,12 +885,16 @@ function addChannelFolder() {
 
 function browseForChannelFolder(index) {
   state.browseMode = 'channel-folder';
+  const inputs = document.querySelectorAll('.channel-folder-path');
+  const currentVal = inputs[index] ? inputs[index].value.trim() : '';
+
   state.browseCallback = (selectedPath) => {
-    const inputs = document.querySelectorAll('.channel-folder-path');
-    if (inputs[index]) inputs[index].value = selectedPath;
+    const inputsAfter = document.querySelectorAll('.channel-folder-path');
+    if (inputsAfter[index]) inputsAfter[index].value = selectedPath;
   };
   state.browseSelected = '';
-  state.browsePath = 'C:\\';
+
+  state.browsePath = currentVal || 'C:\\';
   openBrowseModal();
 }
 
@@ -978,6 +1040,27 @@ async function deleteProject(id) {
   state.projects = state.projects.filter(a => a.id !== id);
   renderPipelineColumns();
   toast('Vídeo removido', 'success');
+}
+
+async function duplicateProject(id) {
+  const p = state.projects.find(pr => pr.id === id);
+  if (!p) return;
+
+  const newProject = {
+    ...p,
+    id: undefined, // Will be generated by server
+    title: p.title + ' (Cópia)',
+    createdAt: undefined,
+    updatedAt: undefined
+  };
+
+  const saved = await api('/api/projects', { method: 'POST', body: newProject });
+  if (saved) {
+    state.projects.push(saved);
+    renderPipelineColumns();
+    if (state.currentView === 'dashboard') renderDashboard();
+    toast('Vídeo duplicado!', 'success');
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -1136,11 +1219,13 @@ function removeChecklistItem(index) {
 // ─── Browse for Project Path ─────────────────────────────────────
 function openBrowseForProject() {
   state.browseMode = 'channel-folder'; // reuse folder browser logic
+  const currentVal = document.getElementById('projectPath').value.trim();
+
   state.browseCallback = (selectedPath) => {
     document.getElementById('projectPath').value = selectedPath;
   };
   state.browseSelected = '';
-  state.browsePath = 'C:\\';
+  state.browsePath = currentVal || 'C:\\';
   openBrowseModal();
 }
 
@@ -1148,6 +1233,8 @@ function openBrowseForProject() {
 // BROWSE MODAL
 // ═══════════════════════════════════════════════════════════════════
 async function openBrowseModal() {
+  state.browseHistory = [];
+  updateBrowseBackBtn();
   openModal('browseModal');
 
   // Load drives
@@ -1157,10 +1244,16 @@ async function openBrowseModal() {
       <button class="drive-btn" onclick="browseTo('${d}\\\\')">${d}</button>
     `).join('');
 
-  browseTo(state.browsePath);
+  browseTo(state.browsePath, false);
 }
 
-async function browseTo(folderPath) {
+async function browseTo(folderPath, recordHistory = true) {
+  if (recordHistory && folderPath !== state.browsePath) {
+    state.browseHistory.push(state.browsePath);
+    if (state.browseHistory.length > 30) state.browseHistory.shift();
+    updateBrowseBackBtn();
+  }
+
   state.browsePath = folderPath;
   document.getElementById('browseCurrentPath').value = folderPath;
 
@@ -1184,6 +1277,34 @@ async function browseTo(folderPath) {
   if (state.browseMode === 'channel-folder') {
     state.browseSelected = folderPath;
   }
+}
+
+function updateBrowseBackBtn() {
+  const btn = document.getElementById('btnBrowseBack');
+  if (btn) btn.disabled = state.browseHistory.length === 0;
+}
+
+function goBackBrowse() {
+  if (state.browseHistory.length === 0) return;
+  const prev = state.browseHistory.pop();
+  updateBrowseBackBtn();
+  browseTo(prev, false);
+}
+
+function goUpBrowse() {
+  let p = state.browsePath;
+  // Remove trailing slash if present (except for root like C:\)
+  if (p.endsWith('\\') && p.length > 3) p = p.slice(0, -1);
+  const lastSlash = p.lastIndexOf('\\');
+  if (lastSlash === -1) return; // Already at root or invalid
+
+  let parent = p.substring(0, lastSlash);
+  // If parent is just "C:", normalize to "C:\"
+  if (parent.length === 2 && parent.endsWith(':')) parent += '\\';
+  // Ensure trailing backslash for intermediate folders if they didn't have one
+  // but browseTo handles either. Windows Explorer usually shows with \ at root only.
+
+  browseTo(parent);
 }
 
 function selectBrowseItem(itemPath) {

@@ -164,15 +164,40 @@ app.post('/api/projects', (req, res) => {
         channelId: req.body.channelId || '',
         stage: req.body.stage || 'idea',
         notes: req.body.notes || '',
+        path: req.body.path || '',
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
         dueDate: req.body.dueDate || '',
         tags: req.body.tags || [],
+        labels: req.body.labels || [],
+        checklist: req.body.checklist || [],
         priority: req.body.priority || 'normal'
     };
     projects.push(newProject);
     writeJSON(PROJECTS_FILE, projects);
     res.json(newProject);
+});
+
+app.put('/api/projects/reorder', (req, res) => {
+    const { stage, projectIds } = req.body;
+    let projects = readJSON(PROJECTS_FILE, []);
+
+    const stageProjects = projects.filter(p => p.stage === stage || projectIds.includes(p.id));
+    const otherProjects = projects.filter(p => p.stage !== stage && !projectIds.includes(p.id));
+
+    stageProjects.forEach(p => p.stage = stage);
+
+    stageProjects.sort((a, b) => {
+        const idxA = projectIds.indexOf(a.id);
+        const idxB = projectIds.indexOf(b.id);
+        const rankA = idxA === -1 ? 9999 : idxA;
+        const rankB = idxB === -1 ? 9999 : idxB;
+        return rankA - rankB;
+    });
+
+    projects = [...otherProjects, ...stageProjects];
+    writeJSON(PROJECTS_FILE, projects);
+    res.json({ ok: true });
 });
 
 app.put('/api/projects/:id', (req, res) => {

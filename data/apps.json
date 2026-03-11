@@ -25,5 +25,14 @@
     "category": "geral",
     "stage": "images",
     "description": "Busca no Google de Creative Commons"
+  },
+  {
+    "id": "app1773094822365",
+    "name": "Prompts Histórias",
+    "path": "C:\\Master Folder\\Programas\\Agents\\PromptsParaHistorias\\PromptsParaHistorias.exe",
+    "icon": "🔧",
+    "category": "geral",
+    "stage": "images",
+    "description": ""
   }
 ]

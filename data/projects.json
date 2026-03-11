@@ -1,12 +1,180 @@
 [
   {
+    "id": "proj1773228647745",
+    "title": "0002 Classic Muscle Car Trivia (60s–70s) Part 2",
+    "channelId": "ch1",
+    "stage": "script",
+    "notes": "",
+    "path": "C:\\Master Folder\\Work\\YouTube\\Cars Trivia\\0002 Classic Muscle Car Trivia (60s–70s) Part 2",
+    "createdAt": "2026-03-11T11:30:47.745Z",
+    "updatedAt": "2026-03-11T11:46:12.861Z",
+    "dueDate": "",
+    "tags": [],
+    "labels": [],
+    "checklist": [
+      {
+        "text": "Organizar arquivos",
+        "done": false
+      },
+      {
+        "text": "Revisar audio",
+        "done": false
+      }
+    ],
+    "priority": "normal"
+  },
+  {
+    "id": "proj1773229352351",
+    "title": "0003 Classic Muscle Car Trivia (60s–70s) Part 3",
+    "channelId": "ch1",
+    "stage": "script",
+    "notes": "",
+    "path": "C:\\Master Folder\\Work\\YouTube\\Cars Trivia\\0003 Classic Muscle Car Trivia (60s–70s) Part 3",
+    "createdAt": "2026-03-11T11:42:32.351Z",
+    "updatedAt": "2026-03-11T11:46:18.387Z",
+    "dueDate": "",
+    "tags": [],
+    "labels": [],
+    "checklist": [
+      {
+        "text": "Organizar arquivos",
+        "done": false
+      },
+      {
+        "text": "Revisar audio",
+        "done": false
+      }
+    ],
+    "priority": "normal"
+  },
+  {
+    "id": "proj1773229541844",
+    "title": "0005 Mustang vs Camaro Rivalry - Part 2",
+    "channelId": "ch1",
+    "stage": "script",
+    "notes": "",
+    "path": "C:\\Master Folder\\Work\\YouTube\\Cars Trivia\\0005 Mustang vs Camaro Rivalry - Part 2",
+    "createdAt": "2026-03-11T11:45:41.844Z",
+    "updatedAt": "2026-03-11T11:46:55.613Z",
+    "dueDate": "",
+    "tags": [],
+    "labels": [],
+    "checklist": [
+      {
+        "text": "Organizar arquivos",
+        "done": false
+      },
+      {
+        "text": "Revisar audio",
+        "done": false
+      }
+    ],
+    "priority": "normal"
+  },
+  {
+    "id": "proj1773229622064",
+    "title": "0006 Mustang vs Camaro Rivalry - Part 3",
+    "channelId": "ch1",
+    "stage": "script",
+    "notes": "",
+    "path": "C:\\Master Folder\\Work\\YouTube\\Cars Trivia\\0006 Mustang vs Camaro Rivalry - Part 3",
+    "createdAt": "2026-03-11T11:47:02.064Z",
+    "updatedAt": "2026-03-11T11:47:16.624Z",
+    "dueDate": "",
+    "tags": [],
+    "labels": [],
+    "checklist": [
+      {
+        "text": "Organizar arquivos",
+        "done": false
+      },
+      {
+        "text": "Revisar audio",
+        "done": false
+      }
+    ],
+    "priority": "normal"
+  },
+  {
+    "id": "proj1773229782995",
+    "title": "0007 Mopar Legends - Part 1",
+    "channelId": "ch1",
+    "stage": "script",
+    "notes": "",
+    "path": "C:\\Master Folder\\Work\\YouTube\\Cars Trivia\\0007 Mopar Legends - Part 1",
+    "createdAt": "2026-03-11T11:49:42.995Z",
+    "updatedAt": "2026-03-11T11:50:26.085Z",
+    "dueDate": "",
+    "tags": [],
+    "labels": [],
+    "checklist": [
+      {
+        "text": "Organizar arquivos",
+        "done": false
+      },
+      {
+        "text": "Revisar audio",
+        "done": false
+      }
+    ],
+    "priority": "normal"
+  },
+  {
+    "id": "proj1773229901776",
+    "title": "0008 Mopar Legends - Part 2",
+    "channelId": "ch1",
+    "stage": "script",
+    "notes": "",
+    "path": "C:\\Master Folder\\Work\\YouTube\\Cars Trivia\\0008 Mopar Legends - Part 2",
+    "createdAt": "2026-03-11T11:51:41.776Z",
+    "updatedAt": "2026-03-11T11:52:00.625Z",
+    "dueDate": "",
+    "tags": [],
+    "labels": [],
+    "checklist": [
+      {
+        "text": "Organizar arquivos",
+        "done": false
+      },
+      {
+        "text": "Revisar audio",
+        "done": false
+      }
+    ],
+    "priority": "normal"
+  },
+  {
+    "id": "proj1773229924838",
+    "title": "0009 Mopar Legends - Part 3",
+    "channelId": "ch1",
+    "stage": "script",
+    "notes": "",
+    "path": "C:\\Master Folder\\Work\\YouTube\\Cars Trivia\\0009 Mopar Legends - Part 3",
+    "createdAt": "2026-03-11T11:52:04.838Z",
+    "updatedAt": "2026-03-11T11:52:24.536Z",
+    "dueDate": "",
+    "tags": [],
+    "labels": [],
+    "checklist": [
+      {
+        "text": "Organizar arquivos",
+        "done": false
+      },
+      {
+        "text": "Revisar audio",
+        "done": false
+      }
+    ],
+    "priority": "normal"
+  },
+  {
     "id": "proj1773043405696",
     "title": "0001 Classic Muscle Car Trivia (60s–70s) Part 1",
     "channelId": "ch1",
-    "stage": "editing",
+    "stage": "published",
     "notes": "",
     "createdAt": "2026-03-09T08:03:25.696Z",
-    "updatedAt": "2026-03-09T10:34:00.967Z",
+    "updatedAt": "2026-03-11T11:30:35.463Z",
     "dueDate": "",
     "tags": [],
     "priority": "high",
@@ -19,8 +187,32 @@
       },
       {
         "text": "Revisar audio",
-        "done": false
+        "done": true
       }
     ]
+  },
+  {
+    "id": "proj1773229500027",
+    "title": "0004 Mustang vs Camaro Rivalry - Part 1",
+    "channelId": "ch1",
+    "stage": "images",
+    "notes": "",
+    "path": "C:\\Master Folder\\Work\\YouTube\\Cars Trivia\\0004 Mustang vs Camaro Rivalry - Part 1",
+    "createdAt": "2026-03-11T11:45:00.027Z",
+    "updatedAt": "2026-03-11T11:45:35.877Z",
+    "dueDate": "",
+    "tags": [],
+    "labels": [],
+    "checklist": [
+      {
+        "text": "Organizar arquivos",
+        "done": false
+      },
+      {
+        "text": "Revisar audio",
+        "done": false
+      }
+    ],
+    "priority": "high"
   }
 ]

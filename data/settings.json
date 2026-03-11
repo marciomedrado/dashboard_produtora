@@ -7,6 +7,12 @@
       "color": "#ff4d4d"
     },
     {
+      "id": "stage1773046559491",
+      "name": "Rascunho",
+      "icon": "📌",
+      "color": "#9B59B6"
+    },
+    {
       "id": "script",
       "name": "Roteiro",
       "icon": "📝",
@@ -53,12 +59,6 @@
       "name": "Publicado",
       "icon": "✅",
       "color": "#00B894"
-    },
-    {
-      "id": "stage1773046559491",
-      "name": "Rascunho",
-      "icon": "📌",
-      "color": "#9B59B6"
     }
   ],
   "labels": [

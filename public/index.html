@@ -342,6 +342,8 @@
       </div>
       <div class="modal-body">
         <div class="browse-path-bar">
+          <button class="btn-icon" onclick="goBackBrowse()" title="Voltar" id="btnBrowseBack" disabled>⬅️</button>
+          <button class="btn-icon" onclick="goUpBrowse()" title="Subir um nível">⬆️</button>
           <input type="text" id="browseCurrentPath" class="input-styled" placeholder="C:\">
           <button class="btn-secondary"
             onclick="browseTo(document.getElementById('browseCurrentPath').value)">Ir</button>
