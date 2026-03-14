@@ -19,6 +19,12 @@
       "color": "#ffcc00"
     },
     {
+      "id": "stage1773459359428",
+      "name": "Quiz gerado",
+      "icon": "📌",
+      "color": "#9B59B6"
+    },
+    {
       "id": "images",
       "name": "Produção de Imagens",
       "icon": "🎨",

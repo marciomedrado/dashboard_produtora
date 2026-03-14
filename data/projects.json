@@ -1,53 +1,5 @@
 [
   {
-    "id": "proj1773228647745",
-    "title": "0002 Classic Muscle Car Trivia (60s–70s) Part 2",
-    "channelId": "ch1",
-    "stage": "script",
-    "notes": "",
-    "path": "C:\\Master Folder\\Work\\YouTube\\Cars Trivia\\0002 Classic Muscle Car Trivia (60s–70s) Part 2",
-    "createdAt": "2026-03-11T11:30:47.745Z",
-    "updatedAt": "2026-03-11T11:46:12.861Z",
-    "dueDate": "",
-    "tags": [],
-    "labels": [],
-    "checklist": [
-      {
-        "text": "Organizar arquivos",
-        "done": false
-      },
-      {
-        "text": "Revisar audio",
-        "done": false
-      }
-    ],
-    "priority": "normal"
-  },
-  {
-    "id": "proj1773229352351",
-    "title": "0003 Classic Muscle Car Trivia (60s–70s) Part 3",
-    "channelId": "ch1",
-    "stage": "script",
-    "notes": "",
-    "path": "C:\\Master Folder\\Work\\YouTube\\Cars Trivia\\0003 Classic Muscle Car Trivia (60s–70s) Part 3",
-    "createdAt": "2026-03-11T11:42:32.351Z",
-    "updatedAt": "2026-03-11T11:46:18.387Z",
-    "dueDate": "",
-    "tags": [],
-    "labels": [],
-    "checklist": [
-      {
-        "text": "Organizar arquivos",
-        "done": false
-      },
-      {
-        "text": "Revisar audio",
-        "done": false
-      }
-    ],
-    "priority": "normal"
-  },
-  {
     "id": "proj1773229541844",
     "title": "0005 Mustang vs Camaro Rivalry - Part 2",
     "channelId": "ch1",
@@ -55,17 +7,17 @@
     "notes": "",
     "path": "C:\\Master Folder\\Work\\YouTube\\Cars Trivia\\0005 Mustang vs Camaro Rivalry - Part 2",
     "createdAt": "2026-03-11T11:45:41.844Z",
-    "updatedAt": "2026-03-11T11:46:55.613Z",
+    "updatedAt": "2026-03-14T04:01:31.229Z",
     "dueDate": "",
     "tags": [],
     "labels": [],
     "checklist": [
       {
-        "text": "Organizar arquivos",
+        "text": "Imagens geradas",
         "done": false
       },
       {
-        "text": "Revisar audio",
+        "text": "Imagens revisadas",
         "done": false
       }
     ],
@@ -195,11 +147,11 @@
     "id": "proj1773229500027",
     "title": "0004 Mustang vs Camaro Rivalry - Part 1",
     "channelId": "ch1",
-    "stage": "images",
+    "stage": "published",
     "notes": "",
     "path": "C:\\Master Folder\\Work\\YouTube\\Cars Trivia\\0004 Mustang vs Camaro Rivalry - Part 1",
     "createdAt": "2026-03-11T11:45:00.027Z",
-    "updatedAt": "2026-03-11T11:45:35.877Z",
+    "updatedAt": "2026-03-11T21:17:56.035Z",
     "dueDate": "",
     "tags": [],
     "labels": [],
@@ -214,5 +166,77 @@
       }
     ],
     "priority": "high"
+  },
+  {
+    "id": "proj1773228647745",
+    "title": "0002 Classic Muscle Car Trivia (60s–70s) Part 2",
+    "channelId": "ch1",
+    "stage": "images",
+    "notes": "",
+    "path": "C:\\Master Folder\\Work\\YouTube\\Cars Trivia\\0002 Classic Muscle Car Trivia (60s–70s) Part 2",
+    "createdAt": "2026-03-11T11:30:47.745Z",
+    "updatedAt": "2026-03-14T04:01:04.250Z",
+    "dueDate": "",
+    "tags": [],
+    "labels": [],
+    "checklist": [
+      {
+        "text": "Imagens geradas",
+        "done": false
+      },
+      {
+        "text": "Imagens revisadas",
+        "done": false
+      }
+    ],
+    "priority": "normal"
+  },
+  {
+    "id": "proj1773229352351",
+    "title": "0003 Classic Muscle Car Trivia (60s–70s) Part 3",
+    "channelId": "ch1",
+    "stage": "stage1773459359428",
+    "notes": "",
+    "path": "C:\\Master Folder\\Work\\YouTube\\Cars Trivia\\0003 Classic Muscle Car Trivia (60s–70s) Part 3",
+    "createdAt": "2026-03-11T11:42:32.351Z",
+    "updatedAt": "2026-03-14T04:01:47.882Z",
+    "dueDate": "",
+    "tags": [],
+    "labels": [],
+    "checklist": [
+      {
+        "text": "Imagens geradas",
+        "done": false
+      },
+      {
+        "text": "Imagens revisadas",
+        "done": false
+      }
+    ],
+    "priority": "normal"
+  },
+  {
+    "id": "proj1773461821433",
+    "title": "0010 Corvette Heritage (C1–C8) - Part 1",
+    "channelId": "ch1",
+    "stage": "script",
+    "notes": "",
+    "path": "C:\\Master Folder\\Work\\YouTube\\Cars Trivia\\0010 Corvette Heritage (C1–C8) - Part 1",
+    "createdAt": "2026-03-14T04:17:01.436Z",
+    "updatedAt": "2026-03-14T04:17:40.254Z",
+    "dueDate": "",
+    "tags": [],
+    "labels": [],
+    "checklist": [
+      {
+        "text": "Imagens geradas",
+        "done": false
+      },
+      {
+        "text": "Imagens revisadas",
+        "done": false
+      }
+    ],
+    "priority": "normal"
   }
 ]
